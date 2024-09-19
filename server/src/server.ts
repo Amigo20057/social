@@ -9,12 +9,12 @@ import { pictureRouter } from './picture/picture.controller'
 import { userRouter } from './user/user.controller'
 import { logger } from './utils/log'
 
-// Определяем путь к директории uploads
-// const uploadsDir = path.join(__dirname, '../uploads')
+// Определяем путь к директории avatars
+// const avatarsDir = path.join(__dirname, '../avatars')
 
-// Создаем директорию uploads, если она не существует
-// if (!fs.existsSync(uploadsDir)) {
-// fs.mkdirSync(uploadsDir, { recursive: true })
+//Создаем директорию avatars, если она не существует
+// if (!fs.existsSync(avatarsDir)) {
+// 	fs.mkdirSync(avatarsDir, { recursive: true })
 // }
 
 const PORT = process.env.PORT
@@ -25,7 +25,8 @@ async function main() {
 	app.use(helmet())
 	app.use(compression())
 	app.use(express.json())
-	app.use('/uploads', express.static(path.join(__dirname, 'uploads/')))
+
+	app.use('/avatars', express.static(path.join(__dirname, 'avatars/')))
 
 	app.use('/auth', authRouter)
 	app.use('/user', userRouter)

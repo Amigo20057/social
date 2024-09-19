@@ -19,12 +19,12 @@ route.post(
 			if (!userId) {
 				return res.status(401).json({ message: 'User ID is missing' })
 			}
-			const avatarUrl = `../uploads/${req.file.filename}`
+			const avatarUrl = `../avatars/${req.file.filename}`
 
 			await userService.updateUserAvatar(userId, avatarUrl)
 
 			res
-				.status(201)
+				.status(200)
 				.json({ message: 'Avatar uploaded successfully', avatarUrl })
 		} catch (err) {
 			res
@@ -44,7 +44,7 @@ route.get(
 			}
 
 			const user = await userService.getMe(req._id)
-			res.status(201).json(user)
+			res.status(200).json(user)
 		} catch (err) {
 			res
 				.status(500)

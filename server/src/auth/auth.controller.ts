@@ -17,7 +17,7 @@ route.post('/register', async (req: Request, res: Response) => {
 
 		const user = await userService.createUser(req.body)
 
-		res.status(201).json(user)
+		res.status(200).json(user)
 	} catch (err: unknown) {
 		if (err instanceof Error) {
 			res.status(500).json({ error: err.message })
@@ -30,7 +30,7 @@ route.post('/register', async (req: Request, res: Response) => {
 route.post('/login', async (req: Request, res: Response) => {
 	try {
 		const user = await authService.login(req.body)
-		res.status(201).json(user)
+		res.status(200).json(user)
 	} catch (err: unknown) {
 		if (err instanceof Error) {
 			res.status(500).json({ error: err.message })

@@ -9,16 +9,20 @@ const pictureService = new PictureService()
 route.post(
 	'/create-picture',
 	checkAuth,
-	async (req: Request, res: Response) => {
+	async (req: Request & { _id?: string }, res: Response) => {
 		try {
 			const validate = createPictureDto.safeParse(req.body)
 			if (!validate.success) {
 				return res.status(400).json({ message: validate.error })
 			}
+			const userId = req._id
+			if (!userId) {
+				return res.status(404).json({ message: 'User ID is missing' })
+			}
 
-			const picture = await pictureService.createPicture(req.body)
+			const picture = await pictureService.createPicture(req.body, userId)
 
-			res.status(201).json(picture)
+			res.status(200).json(picture)
 		} catch (err: unknown) {
 			if (err instanceof Error) {
 				res.status(500).json({ error: err.message })
