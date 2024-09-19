@@ -17,6 +17,9 @@ export class PictureService {
 				userId: id,
 			},
 		})
-		
+	}
+
+	async getAll() {
+		return await this.prisma.picture.findMany()
 	}
 }
