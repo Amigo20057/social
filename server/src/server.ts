@@ -27,6 +27,7 @@ async function main() {
 	app.use(express.json())
 
 	app.use('/avatars', express.static(path.join(__dirname, 'avatars/')))
+	app.use('/pictures', express.static(path.join(__dirname, 'pictures/')))
 
 	app.use('/auth', authRouter)
 	app.use('/user', userRouter)

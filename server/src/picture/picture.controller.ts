@@ -1,4 +1,5 @@
 import { checkAuth } from '@/utils/auth.middleware'
+import { uploadPictures } from '@/utils/multer'
 import { Request, Response, Router } from 'express'
 import { createPictureDto } from './dto/createPictureDto'
 import { PictureService } from './picture.service'
@@ -9,8 +10,13 @@ const pictureService = new PictureService()
 route.post(
 	'/create-picture',
 	checkAuth,
+	uploadPictures.single('picture'),
 	async (req: Request & { _id?: string }, res: Response) => {
 		try {
+			if (!req.file) {
+				return res.status(400).json({ message: 'No file uploaded' })
+			}
+
 			const validate = createPictureDto.safeParse(req.body)
 			if (!validate.success) {
 				return res.status(400).json({ message: validate.error })
@@ -20,7 +26,13 @@ route.post(
 				return res.status(404).json({ message: 'User ID is missing' })
 			}
 
-			const picture = await pictureService.createPicture(req.body, userId)
+			const pictureUrl = `../pictures/${req.file.filename}`
+
+			const picture = await pictureService.createPicture(
+				req.body,
+				userId,
+				pictureUrl
+			)
 
 			res.status(200).json(picture)
 		} catch (err: unknown) {

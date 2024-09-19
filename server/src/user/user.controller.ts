@@ -1,5 +1,5 @@
 import { checkAuth } from '@/utils/auth.middleware'
-import upload from '@/utils/multer'
+import { uploadAvatars } from '@/utils/multer'
 import { Request, Response, Router } from 'express'
 import { UserService } from './user.service'
 
@@ -9,7 +9,7 @@ const userService = new UserService()
 route.post(
 	'/upload-avatar',
 	checkAuth,
-	upload.single('avatar'),
+	uploadAvatars.single('avatar'),
 	async (req: Request & { _id?: string }, res: Response) => {
 		try {
 			if (!req.file) {
