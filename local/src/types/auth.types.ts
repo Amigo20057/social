@@ -5,6 +5,11 @@ export interface IRegister {
 	avatar?: string
 }
 
+export interface ILogin {
+	email: string
+	password: string
+}
+
 export interface Payload {
 	token?: string
 }
