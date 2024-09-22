@@ -1,21 +1,29 @@
 import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { fetchRegister } from '../../../redux/slices/auth'
+import { AppDispatch } from '../../../redux/store'
 import { IRegister } from '../../../types/auth.types'
 import styles from './Register.module.css'
 
 export const Register: React.FC = () => {
+	const dispatch: AppDispatch = useDispatch<AppDispatch>()
 	const {
 		register,
 		handleSubmit,
-		watch,
 		formState: { errors },
 	} = useForm<IRegister>()
 
-	const onSubmit: SubmitHandler<IRegister> = data => {
-		console.log(data)
+	const onSubmit: SubmitHandler<IRegister> = async value => {
+		const data = await dispatch(fetchRegister(value))
+		if (!data.payload) {
+			return alert('Не вдалося зареєструватися')
+		}
+		if ('token' in data.payload) {
+			window.localStorage.setItem('token', data.payload.token)
+		}
 	}
-	console.log(watch('name'))
 
 	return (
 		<div className={styles.register}>

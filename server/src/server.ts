@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client'
 import compression from 'compression'
+import cors from 'cors'
 import 'dotenv/config'
 import express, { Request, Response } from 'express'
 import helmet from 'helmet'
@@ -22,6 +23,7 @@ const app = express()
 export const prisma = new PrismaClient()
 
 async function main() {
+	app.use(cors())
 	app.use(helmet())
 	app.use(compression())
 	app.use(express.json())
