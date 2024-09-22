@@ -2,24 +2,24 @@ import React from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, Navigate } from 'react-router-dom'
-import { fetchRegister, selectIsAuth } from '../../../redux/slices/auth'
+import { fetchLogin, selectIsAuth } from '../../../redux/slices/auth'
 import { AppDispatch } from '../../../redux/store'
-import { IRegister } from '../../../types/auth.types'
-import styles from './Register.module.css'
+import { ILogin } from '../../../types/auth.types'
+import styles from './Login.module.css'
 
-export const Register: React.FC = () => {
-	const isAuth: boolean = useSelector(selectIsAuth)
+export const Login: React.FC = () => {
+	const isAuth = useSelector(selectIsAuth)
 	const dispatch: AppDispatch = useDispatch<AppDispatch>()
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm<IRegister>()
+	} = useForm<ILogin>()
 
-	const onSubmit: SubmitHandler<IRegister> = async value => {
-		const data = await dispatch(fetchRegister(value))
+	const onSubmit: SubmitHandler<ILogin> = async value => {
+		const data = await dispatch(fetchLogin(value))
 		if (!data.payload) {
-			return alert('Не вдалося зареєструватися')
+			return alert('Не вдалося авторизуватися')
 		}
 		if ('token' in data.payload) {
 			window.localStorage.setItem('token', data.payload.token)
@@ -31,24 +31,12 @@ export const Register: React.FC = () => {
 	}
 
 	return (
-		<div className={styles.register}>
+		<div className={styles.login}>
 			<div className={styles.container}>
 				<h1 style={{ padding: '10px 10px 0 10px' }}>
 					Ласкаво просимо до Pinterest
 				</h1>
-				<p style={{ padding: '10px 115px 10px' }}>
-					Знаходьте нові ідеї для натхнення
-				</p>
 				<form onSubmit={handleSubmit(onSubmit)}>
-					<label htmlFor='name'>Ім'я акаунту</label>
-					<input
-						id='name'
-						type='text'
-						defaultValue=''
-						{...register('name', { required: true })}
-						placeholder="Введiть ім'я акаунту"
-					/>
-					{errors.name && <span>Укажіть ім'я акаунту.</span>}
 					<label htmlFor='email'>Адреса електронної пошти</label>
 					<input
 						id='email'
@@ -69,8 +57,8 @@ export const Register: React.FC = () => {
 					{errors.password && <span>Укажіть пароль.</span>}
 					<button type='submit'>Продовжити</button>
 				</form>
-				<Link to='/login' className={styles.login}>
-					<h4>Вже реєструвалися?</h4>
+				<Link to='/register' className={styles.register}>
+					<h4>Ще не зареєструвалися?</h4>
 				</Link>
 			</div>
 		</div>
