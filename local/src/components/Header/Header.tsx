@@ -32,7 +32,7 @@ export const Header: React.FC = () => {
 					) : (
 						<div
 							style={{
-								width: '150px',
+								width: '205px',
 								padding: '20px',
 								height: '48px',
 								display: 'flex',
@@ -40,6 +40,7 @@ export const Header: React.FC = () => {
 								color: '#000',
 								fontSize: '20px',
 								fontWeight: '700',
+								marginRight: '20px',
 							}}
 						>
 							<img width={80} height={80} src='/icon.png' alt='icon' />
