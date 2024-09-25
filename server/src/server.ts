@@ -8,6 +8,7 @@ import path from 'path'
 import { authRouter } from './auth/auth.controller'
 import { pictureRouter } from './picture/picture.controller'
 import { userRouter } from './user/user.controller'
+import { corsOptions } from './utils/cors'
 import { logger } from './utils/log'
 
 // Определяем путь к директории avatars
@@ -23,10 +24,15 @@ const app = express()
 export const prisma = new PrismaClient()
 
 async function main() {
-	app.use(cors())
+	app.use(cors(corsOptions))
 	app.use(helmet())
 	app.use(compression())
 	app.use(express.json())
+
+	app.use((req, res, next) => {
+		res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin')
+		next()
+	})
 
 	app.use('/avatars', express.static(path.join(__dirname, 'avatars/')))
 	app.use('/pictures', express.static(path.join(__dirname, 'pictures/')))

@@ -1,13 +1,18 @@
+import { ChevronDown } from 'lucide-react'
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { selectIsAuth } from '../../redux/slices/auth'
+import { RootState } from '../../redux/store'
 import styles from './Header.module.css'
 
 export const Header: React.FC = () => {
 	const isAuth = useSelector(selectIsAuth)
+	const userData = useSelector((state: RootState) => state.auth.data)
 	const [activeBtn, setActiveBtn] = useState(1)
 	const navigate = useNavigate()
+
+	console.log(userData)
 
 	const buttons = [
 		{ id: 1, label: 'Головна' },
@@ -70,7 +75,15 @@ export const Header: React.FC = () => {
 				</div>
 			) : (
 				<div className={styles.profile}>
-					<button></button>
+					{userData && userData.avatar ? (
+						<img
+							src={`http://localhost:4444/avatars/${userData.avatar}`}
+							alt='avatar'
+						/>
+					) : (
+						<img src='./def-avatar.png' alt='default-avatar' />
+					)}
+					<ChevronDown size={24} color='#000' />
 				</div>
 			)}
 		</div>

@@ -116,15 +116,26 @@
 .profile {
 	width: 180px;
 	height: 100%;
+	padding: 0 40px;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
 
-.profile button {
+.profile img {
+	width: 50px;
+	height: 50px;
+	border: 3px solid #64ac8f;
+	border-radius: 100px;
+	padding: 2px;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+/* .profile button {
 	width: 50px;
 	height: 50px;
 	background-color: red;
 	border: none;
 	border-radius: 100px;
-}
+} */
