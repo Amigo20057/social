@@ -14,10 +14,14 @@ export interface Payload {
 	token?: string
 }
 
+export interface IUserData {
+	name: string
+	email: string
+	avatar?: string
+}
+
 export interface AuthState {
-	data: {
-		token?: string
-		[key: string]: unknown
-	} | null
+	data: IUserData | null
+	token?: string
 	status: 'loading' | 'loaded' | 'error'
 }

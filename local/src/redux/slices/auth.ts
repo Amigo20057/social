@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import axios from '../../axios.ts'
-import { AuthState, ILogin, IRegister } from '../../types/auth.types'
+import { AuthState, ILogin, IRegister, IUserData } from '../../types/auth.types'
 import { RootState } from '../store.ts'
 
 export const fetchRegister = createAsyncThunk(
@@ -46,7 +46,7 @@ const authSlice = createSlice({
 			})
 			.addCase(
 				fetchRegister.fulfilled,
-				(state, action: PayloadAction<{ token?: string }>) => {
+				(state, action: PayloadAction<IUserData & { token?: string }>) => {
 					state.status = 'loaded'
 					state.data = action.payload
 				}
@@ -63,7 +63,7 @@ const authSlice = createSlice({
 			})
 			.addCase(
 				fetchLogin.fulfilled,
-				(state, action: PayloadAction<{ token: string }>) => {
+				(state, action: PayloadAction<IUserData & { token: string }>) => {
 					state.status = 'loaded'
 					state.data = action.payload
 				}
@@ -80,7 +80,7 @@ const authSlice = createSlice({
 			})
 			.addCase(
 				fetchAuthMe.fulfilled,
-				(state, action: PayloadAction<{ token?: string }>) => {
+				(state, action: PayloadAction<IUserData & { token?: string }>) => {
 					state.status = 'loaded'
 					state.data = action.payload
 				}
@@ -93,7 +93,7 @@ const authSlice = createSlice({
 })
 
 export const selectIsAuth = (state: RootState) => {
-	return state.auth.data?.token || window.localStorage.getItem('token')
+	return state.auth.token || window.localStorage.getItem('token')
 }
 export const authReducer = authSlice.reducer
 
