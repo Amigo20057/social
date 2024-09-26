@@ -4,12 +4,14 @@ import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { selectIsAuth } from '../../redux/slices/auth'
 import { RootState } from '../../redux/store'
+import { ProfileBar } from '../ProfileBar/ProfileBar'
 import styles from './Header.module.css'
 
 export const Header: React.FC = () => {
 	const isAuth = useSelector(selectIsAuth)
 	const userData = useSelector((state: RootState) => state.auth.data)
 	const [activeBtn, setActiveBtn] = useState(1)
+	const [isOpen, setIsOpen] = useState(false)
 	const navigate = useNavigate()
 
 	console.log(userData)
@@ -77,15 +79,31 @@ export const Header: React.FC = () => {
 				<div className={styles.profile}>
 					{userData && userData.avatar ? (
 						<img
+							onClick={() => {
+								setIsOpen(!isOpen)
+							}}
 							src={`http://localhost:4444/avatars/${userData.avatar}`}
 							alt='avatar'
 						/>
 					) : (
-						<img src='./def-avatar.png' alt='default-avatar' />
+						<img
+							onClick={() => {
+								setIsOpen(!isOpen)
+							}}
+							src='./def-avatar.png'
+							alt='default-avatar'
+						/>
 					)}
-					<ChevronDown size={24} color='#000' />
+					<ChevronDown
+						onClick={() => {
+							setIsOpen(!isOpen)
+						}}
+						size={24}
+						color='#000'
+					/>
 				</div>
 			)}
+			<ProfileBar isOpen={isOpen} setIsOpen={setIsOpen} />
 		</div>
 	)
 }
