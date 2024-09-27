@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
 	const [isOpen, setIsOpen] = useState(false)
 	const navigate = useNavigate()
 
-	// console.log(userData)
+	console.log(userData)
 
 	const buttons = [
 		{ id: 1, label: 'Головна' },

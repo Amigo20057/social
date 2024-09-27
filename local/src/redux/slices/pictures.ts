@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import axios from '../../axios'
-import { PictureState } from '../../types/picture.types'
+import { IPicture, PictureState } from '../../types/picture.types'
 
 export const fetchPictures = createAsyncThunk(
 	'pictures/fetchPictures',
@@ -10,8 +10,16 @@ export const fetchPictures = createAsyncThunk(
 	}
 )
 
+export const fetchLikePictures = createAsyncThunk(
+	'pictures/fetchLikePictures',
+	async (id: string | undefined) => {
+		const response = await axios.patch(`/picture/like/${id}`)
+		return response.data
+	}
+)
+
 const initialState: PictureState = {
-	items: [],
+	items: [] as IPicture[],
 	status: 'loading',
 }
 
@@ -31,6 +39,19 @@ const pictureSlice = createSlice({
 			})
 			.addCase(fetchPictures.rejected, state => {
 				state.items = []
+				state.status = 'error'
+			})
+
+			.addCase(fetchLikePictures.fulfilled, (state, action) => {
+				const likedPicture = state.items.find(
+					picture => picture.id === action.meta.arg
+				)
+
+				if (likedPicture && likedPicture.likes !== undefined) {
+					likedPicture.likes += 1
+				}
+			})
+			.addCase(fetchLikePictures.rejected, state => {
 				state.status = 'error'
 			})
 	},

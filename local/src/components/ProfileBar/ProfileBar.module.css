@@ -1,5 +1,6 @@
 .menu {
 	position: absolute;
+	z-index: 1;
 	right: 0;
 	top: 60px;
 	margin-right: 5px;
@@ -12,6 +13,7 @@
 
 .open {
 	position: absolute;
+	z-index: 5;
 	right: 0;
 	top: 60px;
 	margin-right: 5px;

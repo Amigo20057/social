@@ -23,26 +23,39 @@ export class PictureService {
 		return await this.prisma.picture.findMany()
 	}
 
+	async getOne(pictureId: string) {
+		return await this.prisma.picture.findUnique({ where: { id: pictureId } })
+	}
+
 	async like(pictureId: string, userId: string) {
 		const picture = await this.prisma.picture.findUnique({
 			where: { id: pictureId },
 		})
+
 		if (!picture) {
 			throw new Error('Picture not found')
 		}
 
 		if (picture.likesUsers.includes(userId)) {
-			throw new Error('User has already liked this picture')
-		}
-
-		return await this.prisma.picture.update({
-			where: { id: pictureId },
-			data: {
-				likes: picture.likes + 1,
-				likesUsers: {
-					push: userId,
+			return await this.prisma.picture.update({
+				where: { id: pictureId },
+				data: {
+					likes: picture.likes - 1,
+					likesUsers: {
+						set: picture.likesUsers.filter(user => user !== userId),
+					},
 				},
-			},
-		})
+			})
+		} else {
+			return await this.prisma.picture.update({
+				where: { id: pictureId },
+				data: {
+					likes: picture.likes + 1,
+					likesUsers: {
+						push: userId,
+					},
+				},
+			})
+		}
 	}
 }

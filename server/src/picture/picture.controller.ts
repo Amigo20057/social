@@ -58,6 +58,20 @@ route.get('/get-pictures', async (req: Request, res: Response) => {
 	}
 })
 
+route.get('/get-pictures/:id', async (req: Request, res: Response) => {
+	try {
+		const pictureId = req.params.id
+		const picture = await pictureService.getOne(pictureId)
+		res.status(200).json(picture)
+	} catch (err: unknown) {
+		if (err instanceof Error) {
+			res.status(500).json({ error: err.message })
+		} else {
+			res.status(500).json({ error: 'An unknown error occurred' })
+		}
+	}
+})
+
 route.patch(
 	'/like/:id',
 	checkAuth,
@@ -69,7 +83,7 @@ route.patch(
 		}
 		try {
 			await pictureService.like(pictureId, userId)
-			res.status(200).json({ message: 'Liked successfully' })
+			res.status(200).json({ message: 'successfully' })
 		} catch (err: unknown) {
 			if (err instanceof Error) {
 				res.status(500).json({ error: err.message })

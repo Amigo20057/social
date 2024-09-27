@@ -40,7 +40,7 @@ export const ProfileBar = ({ isOpen, setIsOpen }: Props) => {
 
 	return (
 		<div ref={menuRef} className={isOpen ? styles.open : styles.menu}>
-			<h4>Акаунт</h4>
+			<h4 style={{ fontWeight: '400' }}>Акаунт</h4>
 			<Link to='/profile' className={styles.account}>
 				<div className={styles.avatar}>
 					{userData && userData.avatar ? (

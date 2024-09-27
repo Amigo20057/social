@@ -18,7 +18,12 @@ export const Home: React.FC = () => {
 	return (
 		<div className={styles.home}>
 			{pictures.items.map((picture, index) => (
-				<Picture key={index} url={picture.url} name={picture.name} />
+				<Picture
+					key={index}
+					id={picture.id}
+					url={picture.url}
+					name={picture.name}
+				/>
 			))}
 		</div>
 	)
