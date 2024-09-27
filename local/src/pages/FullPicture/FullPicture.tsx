@@ -65,6 +65,20 @@ export const FullPicture = () => {
 		}
 	}
 
+	const [isCopied, setIsCopied] = useState(false)
+
+	const handleCopy = () => {
+		const pageUrl = window.location.href
+
+		navigator.clipboard.writeText(pageUrl).then(() => {
+			setIsCopied(true)
+
+			setTimeout(() => {
+				setIsCopied(false)
+			}, 2000)
+		})
+	}
+
 	return (
 		<div className={styles.fullPicture}>
 			<div className={styles.container}>
@@ -87,7 +101,8 @@ export const FullPicture = () => {
 							)}
 							<h3>{localLikes}</h3>{' '}
 						</div>
-						<Share size={32} />
+						<Share onClick={handleCopy} size={32} />
+						{isCopied && <span>адреса скопійовано</span>}
 					</div>
 					<h1>{data?.name}</h1>
 					<h3>{data?.description}</h3>
