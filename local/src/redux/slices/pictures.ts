@@ -10,6 +10,14 @@ export const fetchPictures = createAsyncThunk(
 	}
 )
 
+export const fetchCreatePicture = createAsyncThunk(
+	'picture/fetchCreatePicture',
+	async (params: FormData) => {
+		const { data } = await axios.post('/picture/create-picture', params)
+		return data
+	}
+)
+
 export const fetchLikePictures = createAsyncThunk(
 	'pictures/fetchLikePictures',
 	async (id: string | undefined) => {
@@ -46,6 +54,19 @@ const pictureSlice = createSlice({
 				state.status = 'loaded'
 			})
 			.addCase(fetchPictures.rejected, state => {
+				state.items = []
+				state.status = 'error'
+			})
+
+			.addCase(fetchCreatePicture.pending, state => {
+				state.items = []
+				state.status = 'loading'
+			})
+			.addCase(fetchCreatePicture.fulfilled, (state, action) => {
+				state.items = action.payload
+				state.status = 'loaded'
+			})
+			.addCase(fetchCreatePicture.rejected, state => {
 				state.items = []
 				state.status = 'error'
 			})

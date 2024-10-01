@@ -102,7 +102,9 @@ export const FullPicture = () => {
 							<h3>{localLikes}</h3>{' '}
 						</div>
 						<Share onClick={handleCopy} size={32} />
-						{isCopied && <span>адреса скопійовано</span>}
+						{isCopied && (
+							<span className={styles.copy}>адреса скопійовано</span>
+						)}
 					</div>
 					<h1>{data?.name}</h1>
 					<h3>{data?.description}</h3>

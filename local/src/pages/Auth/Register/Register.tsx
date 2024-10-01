@@ -8,7 +8,7 @@ import { IRegister } from '../../../types/auth.types'
 import styles from './Register.module.css'
 
 export const Register: React.FC = () => {
-	const isAuth: boolean = useSelector(selectIsAuth)
+	const isAuth = useSelector(selectIsAuth)
 	const dispatch: AppDispatch = useDispatch<AppDispatch>()
 	const {
 		register,
@@ -39,7 +39,7 @@ export const Register: React.FC = () => {
 				<p style={{ padding: '10px 115px 10px' }}>
 					Знаходьте нові ідеї для натхнення
 				</p>
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 					<label htmlFor='name'>Ім'я акаунту</label>
 					<input
 						id='name'

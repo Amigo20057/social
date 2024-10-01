@@ -7,6 +7,12 @@ export interface IPicture {
 	likesUsers?: [string]
 }
 
+export interface ICreatePicture {
+	name: string
+	picture: FileList
+	description: string
+}
+
 export interface PictureState {
 	items: IPicture[]
 	status: 'loading' | 'loaded' | 'error'
