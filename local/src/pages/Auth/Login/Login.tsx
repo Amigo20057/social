@@ -36,7 +36,7 @@ export const Login: React.FC = () => {
 				<h1 style={{ padding: '10px 10px 0 10px' }}>
 					Ласкаво просимо до Pinterest
 				</h1>
-				<form onSubmit={handleSubmit(onSubmit)}>
+				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 					<label htmlFor='email'>Адреса електронної пошти</label>
 					<input
 						id='email'

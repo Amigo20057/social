@@ -13,18 +13,23 @@ export const Home: React.FC = () => {
 		dispatch(fetchPictures())
 	}, [dispatch])
 
+	if (!Array.isArray(pictures.items)) {
+		console.error('pictures.items is not an array', pictures.items)
+		return <div>Error loading pictures</div> // Обработайте ошибку
+	}
 	console.log(pictures.items)
 
 	return (
 		<div className={styles.home}>
-			{pictures.items.map((picture, index) => (
-				<Picture
-					key={index}
-					id={picture.id}
-					url={picture.url}
-					name={picture.name}
-				/>
-			))}
+			{pictures &&
+				pictures.items.map((picture, index) => (
+					<Picture
+						key={index}
+						id={picture.id}
+						url={picture.url}
+						name={picture.name}
+					/>
+				))}
 		</div>
 	)
 }

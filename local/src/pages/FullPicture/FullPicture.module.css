@@ -62,7 +62,7 @@
 	position: relative;
 }
 
-span {
+.copy {
 	position: absolute;
 	left: 55%;
 	transform: translateX(-50%);
