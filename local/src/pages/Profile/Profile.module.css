@@ -1,0 +1,21 @@
+.profile {
+	width: 100%;
+	margin-top: 70px;
+	padding-top: 20px;
+}
+
+.profile h1 {
+	margin: 20px 0 30px 50px;
+	color: #000;
+}
+
+.pictures {
+	width: 100%;
+	padding: 0 200px;
+	background-color: #fff;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+	grid-gap: 16px;
+	justify-content: center;
+	align-items: center;
+}

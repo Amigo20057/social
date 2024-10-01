@@ -27,6 +27,16 @@ export class PictureService {
 		return await this.prisma.picture.findUnique({ where: { id: pictureId } })
 	}
 
+	async getLikedPictures(userId: string) {
+		return await this.prisma.picture.findMany({
+			where: {
+				likesUsers: {
+					has: userId,
+				},
+			},
+		})
+	}
+
 	async like(pictureId: string, userId: string) {
 		const picture = await this.prisma.picture.findUnique({
 			where: { id: pictureId },
