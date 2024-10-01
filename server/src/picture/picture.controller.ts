@@ -58,6 +58,27 @@ route.get('/get-pictures', async (req: Request, res: Response) => {
 	}
 })
 
+route.get(
+	'/liked-pictures',
+	checkAuth,
+	async (req: Request & { _id?: string }, res: Response) => {
+		try {
+			const userId = req._id
+			if (!userId) {
+				return res.status(404).json({ message: 'User ID is missing' })
+			}
+			const pictures = await pictureService.getLikedPictures(userId)
+			res.status(200).json(pictures)
+		} catch (err: unknown) {
+			if (err instanceof Error) {
+				res.status(500).json({ error: err.message })
+			} else {
+				res.status(500).json({ error: 'An unknown error occurred' })
+			}
+		}
+	}
+)
+
 route.get('/get-pictures/:id', async (req: Request, res: Response) => {
 	try {
 		const pictureId = req.params.id

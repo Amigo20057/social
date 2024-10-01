@@ -18,6 +18,14 @@ export const fetchLikePictures = createAsyncThunk(
 	}
 )
 
+export const fetchLikedPictures = createAsyncThunk(
+	'pictures/fetchLikedPictures',
+	async () => {
+		const { data } = await axios.get('/picture/liked-pictures')
+		return data
+	}
+)
+
 const initialState: PictureState = {
 	items: [] as IPicture[],
 	status: 'loading',
@@ -52,6 +60,19 @@ const pictureSlice = createSlice({
 				}
 			})
 			.addCase(fetchLikePictures.rejected, state => {
+				state.status = 'error'
+			})
+
+			.addCase(fetchLikedPictures.pending, state => {
+				state.items = []
+				state.status = 'loading'
+			})
+			.addCase(fetchLikedPictures.fulfilled, (state, action) => {
+				state.items = action.payload
+				state.status = 'loaded'
+			})
+			.addCase(fetchLikedPictures.rejected, state => {
+				state.items = []
 				state.status = 'error'
 			})
 	},
