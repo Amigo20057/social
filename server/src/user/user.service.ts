@@ -38,10 +38,13 @@ export class UserService {
 		return { ...user, token } as IUser & { token: string }
 	}
 
-	async updateUserAvatar(userId: string, avatarUrl: string) {
+	async updateUser(
+		userId: string,
+		updates: { avatar?: string; name?: string }
+	) {
 		return await this.prisma.user.update({
 			where: { id: userId },
-			data: { avatar: avatarUrl },
+			data: updates,
 		})
 	}
 

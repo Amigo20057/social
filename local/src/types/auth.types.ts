@@ -16,8 +16,8 @@ export interface Payload {
 
 export interface IUserData {
 	id?: string
-	name: string
-	email: string
+	name?: string
+	email?: string
 	avatar?: string
 }
 
