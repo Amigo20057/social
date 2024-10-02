@@ -7,26 +7,39 @@ const route = Router()
 const userService = new UserService()
 
 route.post(
-	'/upload-avatar',
+	'/update-user',
 	checkAuth,
 	uploadAvatars.single('avatar'),
 	async (req: Request & { _id?: string }, res: Response) => {
 		try {
-			if (!req.file) {
-				return res.status(400).json({ message: 'No file uploaded' })
-			}
 			const userId = req._id
 			if (!userId) {
 				return res.status(401).json({ message: 'User ID is missing' })
 			}
-			const avatarUrl = `../avatars/${req.file.filename}`
 
-			await userService.updateUserAvatar(userId, avatarUrl)
+			const updates: { avatar?: string; name?: string } = {}
 
-			res
-				.status(200)
-				.json({ message: 'Avatar uploaded successfully', avatarUrl })
+			if (req.file) {
+				const avatarUrl = `../avatars/${req.file.filename}`
+				updates.avatar = avatarUrl
+			}
+
+			if (req.body.name && req.body.name.trim() !== '') {
+				updates.name = req.body.name
+			}
+
+			if (Object.keys(updates).length === 0) {
+				return res.status(400).json({ message: 'No updates provided' })
+			}
+
+			await userService.updateUser(userId, updates)
+
+			res.status(200).json({
+				message: 'User updated successfully',
+				updates,
+			})
 		} catch (err) {
+			console.error('Error updating user:', err)
 			res
 				.status(500)
 				.json({ error: (err as Error).message || 'An unknown error occurred' })
