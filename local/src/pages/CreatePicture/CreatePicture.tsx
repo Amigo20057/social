@@ -69,7 +69,11 @@ export const CreatePicture = () => {
 					</div>
 					{imagePreview && (
 						<div className={styles.preview}>
-							<img src={imagePreview} alt='Preview' />
+							<img
+								style={{ maxWidth: '330px' }}
+								src={imagePreview}
+								alt='Preview'
+							/>
 						</div>
 					)}
 					<div className={styles.info}>

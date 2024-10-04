@@ -7,14 +7,16 @@ import { RootState } from '../../redux/store'
 import { ProfileBar } from '../ProfileBar/ProfileBar'
 import styles from './Header.module.css'
 
-export const Header: React.FC = () => {
+interface HeaderProps {
+	setSearchQuery: (query: string) => void
+}
+
+export const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
 	const isAuth = useSelector(selectIsAuth)
 	const userData = useSelector((state: RootState) => state.auth.data)
 	const [activeBtn, setActiveBtn] = useState(1)
 	const [isOpen, setIsOpen] = useState(false)
 	const navigate = useNavigate()
-
-	console.log(userData)
 
 	const buttons = [
 		{ id: 1, label: 'Головна' },
@@ -68,7 +70,11 @@ export const Header: React.FC = () => {
 				</div>
 			</div>
 			<div className={isAuth ? styles.search : styles.searchHide}>
-				<input type='text' placeholder='Пошук' />
+				<input
+					type='text'
+					placeholder='Пошук'
+					onChange={e => setSearchQuery(e.target.value)} // Update search query here
+				/>
 			</div>
 			{!isAuth ? (
 				<div className={styles.auth}>
