@@ -53,7 +53,7 @@ export const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
 							}}
 						>
 							<img width={80} height={80} src='/icon.png' alt='icon' />
-							<p>Pinterest</p>
+							<p>PicNest</p>
 						</div>
 					)}
 				</div>
@@ -73,7 +73,7 @@ export const Header: React.FC<HeaderProps> = ({ setSearchQuery }) => {
 				<input
 					type='text'
 					placeholder='Пошук'
-					onChange={e => setSearchQuery(e.target.value)} // Update search query here
+					onChange={e => setSearchQuery(e.target.value)}
 				/>
 			</div>
 			{!isAuth ? (

@@ -6,17 +6,7 @@ export const Picture = ({
 	id,
 	url,
 	name,
-}: // isFullPicture,
-IPicture & { isFullPicture?: boolean }) => {
-	// const [isFilled, setIsFilled] = useState(false)
-
-	// console.log(id)
-	// console.log(isFullPicture)
-
-	// const toggleHeart = () => {
-	// 	setIsFilled(!isFilled)
-	// }
-
+}: IPicture & { isFullPicture?: boolean }) => {
 	return (
 		<div className={styles.container}>
 			<Link to={`/picture/${id}`}></Link>
@@ -25,13 +15,6 @@ IPicture & { isFullPicture?: boolean }) => {
 				src={`http://localhost:4444/pictures/${url}`}
 				alt={name}
 			/>
-			{/* <div onClick={toggleHeart}>
-				{isFilled ? (
-					<AiFillHeart className={styles.svg} size={34} color='red' />
-				) : (
-					<AiOutlineHeart className={styles.svg} size={34} color='red' />
-				)}
-			</div> */}
 		</div>
 	)
 }

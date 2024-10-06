@@ -23,11 +23,9 @@
 .avatar {
 	width: 150px;
 	height: 48px;
-	/* margin-right: 50px; */
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	/* background-color: red; */
 }
 
 .buttons {
@@ -131,11 +129,3 @@
 	background-size: cover;
 	background-repeat: no-repeat;
 }
-
-/* .profile button {
-	width: 50px;
-	height: 50px;
-	background-color: red;
-	border: none;
-	border-radius: 100px;
-} */

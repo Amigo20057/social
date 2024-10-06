@@ -12,11 +12,6 @@
 	transition: all 0.25s;
 }
 
-/* .img:hover {
-	filter: brightness(50%);
-	opacity: 75%;
-} */
-
 .svg {
 	position: absolute;
 	top: 20px;

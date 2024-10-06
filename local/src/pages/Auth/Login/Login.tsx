@@ -34,7 +34,7 @@ export const Login: React.FC = () => {
 		<div className={styles.login}>
 			<div className={styles.container}>
 				<h1 style={{ padding: '10px 10px 0 10px' }}>
-					Ласкаво просимо до Pinterest
+					Ласкаво просимо до PicNest
 				</h1>
 				<form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
 					<label htmlFor='email'>Адреса електронної пошти</label>

@@ -10,7 +10,6 @@ import { ICreatePicture } from '../../types/picture.types'
 import styles from './CreatePicture.module.css'
 
 export const CreatePicture = () => {
-	// const imagePreview = ''
 	const isAuth = useSelector(selectIsAuth)
 	const dispatch: AppDispatch = useDispatch<AppDispatch>()
 	const [imagePreview, setImagePreview] = useState<string | null>(null)
@@ -49,7 +48,6 @@ export const CreatePicture = () => {
 			<div className={styles.container}>
 				<form onSubmit={handleSubmit(onSubmit)}>
 					<div className={!imagePreview ? styles.file : styles.hideFile}>
-						{/* <div className={styles.file}> */}
 						<Upload />
 						<h3>Виберiть файл</h3>
 						<input

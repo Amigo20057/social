@@ -34,7 +34,7 @@ export const Register: React.FC = () => {
 		<div className={styles.register}>
 			<div className={styles.container}>
 				<h1 style={{ padding: '10px 10px 0 10px' }}>
-					Ласкаво просимо до Pinterest
+					Ласкаво просимо до PicNest
 				</h1>
 				<p style={{ padding: '10px 115px 10px' }}>
 					Знаходьте нові ідеї для натхнення

@@ -16,11 +16,9 @@ export const ProfileBar = ({ isOpen, setIsOpen }: Props) => {
 	const menuRef = useRef<HTMLDivElement | null>(null)
 
 	const onClickLogout = () => {
-		// if (window.confirm('Ви впевнені, що хочете вийти?')) {
 		dispatch(logout())
 		window.localStorage.removeItem('token')
 		setIsOpen(false)
-		// }
 	}
 
 	useEffect(() => {
@@ -59,12 +57,6 @@ export const ProfileBar = ({ isOpen, setIsOpen }: Props) => {
 			</Link>
 			<div className={styles.additionally}>
 				<h4 style={{ fontWeight: '400' }}>Додатково</h4>
-				{/* <Link to='/settings' className={styles.settings}>
-					<h3>Налаштування</h3>
-				</Link>
-				<Link to='/support' className={styles.support}>
-					<h3>Пiдтримка</h3>
-				</Link> */}
 				<button onClick={onClickLogout} className={styles.logout}>
 					<h3>Вийти</h3>
 				</button>
