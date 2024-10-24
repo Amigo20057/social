@@ -11,14 +11,6 @@ import { userRouter } from './user/user.controller'
 import { corsOptions } from './utils/cors'
 import { logger } from './utils/log'
 
-// Определяем путь к директории avatars
-// const avatarsDir = path.join(__dirname, '../avatars')
-
-//Создаем директорию avatars, если она не существует
-// if (!fs.existsSync(avatarsDir)) {
-// 	fs.mkdirSync(avatarsDir, { recursive: true })
-// }
-
 const PORT = process.env.PORT
 const app = express()
 export const prisma = new PrismaClient()
