@@ -24,30 +24,6 @@ export class UserService {
 		});
 	}
 
-	// async createUser(dto: IUser): Promise<IUser & { token: string }> {
-	// 	const existUser = await this.findUserByEmail(dto.email);
-	// 	if (existUser) {
-	// 		throw new Error("User already exists");
-	// 	}
-
-	// 	dto.password = await this.hashPassword(dto.password);
-
-	// 	const user = await this.prisma.user.create({
-	// 		data: {
-	// 			name: dto.name,
-	// 			email: dto.email,
-	// 			password: dto.password,
-	// 			avatar: dto.avatar,
-	// 		},
-	// 	});
-
-	// 	const token = jwt.sign({ _id: user.id }, process.env.SECRET || "", {
-	// 		expiresIn: "30d",
-	// 	});
-
-	// 	return { ...user, token } as IUser & { token: string };
-	// }
-
 	async updateUser(
 		userId: string,
 		updates: { avatar?: string; name?: string }
